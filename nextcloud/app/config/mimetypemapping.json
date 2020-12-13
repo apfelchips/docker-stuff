@@ -1,0 +1,22 @@
+{
+    "_comment": "extends: https://github.com/nextcloud/server/blob/master/resources/config/mimetypemapping.dist.json",
+    "_comment2": "reload with: php occ files:scan --all",
+    "lst": [
+        "text/plain"
+    ],
+    "conf": [
+        "text/plain"
+    ],
+    "config": [
+        "text/plain"
+    ],
+    "ps": [
+        "text/plain"
+    ],
+    "ps1": [
+        "text/plain"
+    ],
+    "kdbx": [
+        "application/x-kdbx"
+    ]
+}

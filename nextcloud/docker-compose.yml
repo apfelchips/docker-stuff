@@ -1,0 +1,54 @@
+version: '3.7'
+
+services:
+  db: # https://github.com/docker-library/postgres/blob/master/13/alpine/Dockerfile
+    image: postgres:alpine
+    restart: always
+    volumes:
+      - type: bind
+        source: ./nextcloud-db/
+        target: /var/lib/postgresql/data/
+    env_file:
+      - db.env
+
+  app:
+    build: ./app
+    restart: always
+    volumes:
+      - type: bind
+        source: ./nextcloud-data/
+        target: /var/www/html
+    environment:
+      - POSTGRES_HOST=db
+    env_file:
+      - db.env
+    depends_on:
+      - db
+
+  cron:
+    build: ./app
+    restart: always
+    volumes:
+      - type: bind
+        source: ./nextcloud-data/
+        target: /var/www/html
+    entrypoint: /cron.sh
+    environment:
+      - POSTGRES_HOST=db
+    env_file:
+      - db.env
+    depends_on:
+      - db
+  
+  web:
+    build: ./web
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - type: bind
+        source: ./nextcloud-data/
+        target: /var/www/html
+        read_only: true
+    depends_on:
+      - app
