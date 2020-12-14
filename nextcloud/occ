@@ -1,0 +1,6 @@
+#!/bin/sh
+
+for containerid in $(docker ps -q --filter "name=nextcloud_app"); do
+    echo "running on: $containerid" 1>&2 && docker exec -it --user www-data $containerid php -f /var/www/html/occ "$@";
+    exit $? # run once on first container
+done
