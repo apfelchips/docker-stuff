@@ -10,6 +10,3 @@ RUN echo 'max_execution_time=1000;' > /usr/local/etc/php/conf.d/tweaks.ini;
 COPY ./config/* /var/www/html/config/
 
 VOLUME /var/www/html/
-
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["php-fpm"]
