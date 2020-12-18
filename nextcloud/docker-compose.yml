@@ -6,7 +6,7 @@ services:
     restart: always
     volumes:
       - type: bind
-        source: ${NEXTCLOUD_DB_DIR:-/var/nextcloud-db}
+        source: ${NEXTCLOUD_DB_DIR:-./nextcloud-db}
         target: /var/lib/postgresql/data/
     env_file:
       - db.env
@@ -16,7 +16,7 @@ services:
     restart: always
     volumes:
       - type: bind
-        source: ${NEXTCLOUD_DATA_DIR:-/var/nextcloud-data}
+        source: ${NEXTCLOUD_DATA_DIR:-./nextcloud-data}
         target: /var/www/html
     environment:
       - POSTGRES_HOST=db
@@ -30,7 +30,7 @@ services:
     restart: always
     volumes:
       - type: bind
-        source: ${NEXTCLOUD_DATA_DIR:-/var/nextcloud-data}
+        source: ${NEXTCLOUD_DATA_DIR:-./nextcloud-data}
         target: /var/www/html
     entrypoint: /cron.sh
     environment:
@@ -47,7 +47,7 @@ services:
       - ${NEXTCLOUD_PORT:-80}:80
     volumes:
       - type: bind
-        source: ${NEXTCLOUD_DATA_DIR:-/var/nextcloud-data}
+        source: ${NEXTCLOUD_DATA_DIR:-./nextcloud-data}
         target: /var/www/html
         read_only: true
     depends_on:
