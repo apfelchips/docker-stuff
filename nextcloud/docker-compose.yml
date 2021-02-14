@@ -9,6 +9,7 @@ services:
         source: ${NEXTCLOUD_DB_DIR:-./nextcloud-db}
         target: /var/lib/postgresql/data/
     env_file:
+      - .env
       - db.env
 
   app:
@@ -21,6 +22,7 @@ services:
     environment:
       - POSTGRES_HOST=db
     env_file:
+      - .env
       - db.env
     depends_on:
       - db
@@ -36,6 +38,7 @@ services:
     environment:
       - POSTGRES_HOST=db
     env_file:
+      - .env
       - db.env
     depends_on:
       - db
