@@ -3,7 +3,7 @@
 COMPOSE_PROJECT_DIR="$(realpath $(dirname $0))"
 ENV_FILE="${ENV_FILE:-$COMPOSE_PROJECT_DIR/.env}"
 
-test -f $ENV_FILE && source $ENV_FILE
+test -f $ENV_FILE && . $ENV_FILE
 
 if [ -z $POSTGRES_PASSWORD ]; then
 	RANDOM_DB_PASSWORD=$(openssl rand -base64 32)
